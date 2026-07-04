@@ -7,18 +7,23 @@ const BALL_X = 70;
 const BALL_SIZE = 34;
 const GRAVITY = 0.55;
 const JUMP_VELOCITY = 12;
+const DEFENDER_WIDTH = 30;
+const DEFENDER_GAP = 4;
+
+const groupByLevel = [[1], [1,2], [1,3], [2,3]];
+
 
 const pitch = document.querySelector("#pitch");
 const ball = document.querySelector("#ball");
 const scoreLabel = document.querySelector("#score-label");
 
 const target = 8 + state.level * 2;
-const speed = 4.5 + state.level * 1.1;
+const speed = 4.5 + state.level * 0.8
 
 let bally = 0;
 let velocity = 0;
 let canJump = true;
-let defenders = [];
+let obstacles = [];
 let framesToSpawn = 60;
 let score = 0;
 let running = true;
@@ -26,7 +31,7 @@ let paused = false;
 let rafId = null;
 
 pitch.style.setProperty("--kit", opponent.kit);
-document.querySelector("#match-label").textContent = `Level ${state.level + 1} \u00b7 ${player.name} vs ${opponent.name}`;
+document.querySelector("#match-label").textContent = `Level ${state.level + 1} - ${player.name} vs ${opponent.name}`;
 
 function updateScoreLabel() {
     scoreLabel.textContent = `Beaten: ${String(score).padStart(2, "0")}/${target}`;
@@ -38,6 +43,19 @@ function jump() {
         velocity = JUMP_VELOCITY;
         canJump = false;
     }
+}
+
+function pickSize(){
+    const options = groupByLevel[state.level];
+    return options[Math.floor(Math.random() * options.length)];
+}
+
+function isTall(size, index){
+    if (size === 3) 
+        return index === 1;
+    if (size === 2)
+        return state.level === 3 && Math.random() < 0.5 && index === 0;
+    return false;
 }
 
 function spawnDefender() {
