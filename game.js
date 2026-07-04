@@ -15,9 +15,9 @@ const scoreLabel = document.querySelector("#score-label");
 const target = 8 + state.level * 2;
 const speed = 4.5 + state.level * 1.1;
 
-let ballY = 0;
+let bally = 0;
 let velocity = 0;
-let jumpsLeft = 2;
+let canJump = true;
 let defenders = [];
 let framesToSpawn = 60;
 let score = 0;
@@ -34,26 +34,22 @@ function updateScoreLabel() {
 
 function jump() {
     if (!running || paused) return;
-    if (jumpsLeft > 0) {
+    if (canJump) {
         velocity = JUMP_VELOCITY;
         jumpsLeft--;
     }
 }
 
-function spawnDefenders() {
-    const isWall = Math.random() < 0.3;
-    const count = isWall ? 2 : 1;
+function spawnDefender() {
     const height = 55 + Math.floor(Math.random() * 26);
-    const baseX = pitch.offsetWidth + 20;
-    for (let i = 0; i < count; i++) {
-        const el = document.createElement("figure");
-        el.className = "defender";
-        el.style.height = `${height}px`;
-        const x = baseX + i * 34;
-        el.style.transform = `translateX(${x}px)`;
-        pitch.appendChild(el);
-        defenders.push({ el, x, h: height, counted: false });
-    }
+    const x = pitch.offsetWidth + 20;
+    const el = document.createElement("figure");
+
+    el.className = "defender";
+    el.style.height = `${height}px`;
+    el.style.transform = `translateX(${x}px)`;
+    pitch.appendChild(el);
+    defenders.push({ el, x, h: height, counted: false });
     framesToSpawn = Math.max(45, 85 - state.level * 8) + Math.floor(Math.random() * 45);
 }
 
@@ -61,6 +57,7 @@ function endMatch(won) {
     running = false;
     cancelAnimationFrame(rafId);
     state.lastMatch = { opponent: opponent.name, score, target, won };
+
     if (won) {
         state.totalBeaten += score;
         state.results[state.level] = true;
@@ -72,16 +69,16 @@ function endMatch(won) {
 
 function frame() {
     velocity -= GRAVITY;
-    ballY += velocity;
-    if (ballY <= 0) {
-        ballY = 0;
+    bally += velocity;
+    if (bally <= 0) {
+        bally = 0;
         velocity = 0;
-        jumpsLeft = 2;
+        canJump = true;
     }
-    ball.style.bottom = `${GROUND + ballY}px`;
+    ball.style.bottom = `${GROUND + bally}px`;
 
     framesToSpawn--;
-    if (framesToSpawn <= 0) spawnDefenders();
+    if (framesToSpawn <= 0) spawnDefender();
 
     for (let i = defenders.length - 1; i >= 0; i--) {
         const defender = defenders[i];
@@ -89,7 +86,7 @@ function frame() {
         defender.el.style.transform = `translateX(${defender.x}px)`;
 
         const overlapsX = defender.x < BALL_X + BALL_SIZE - 8 && defender.x + 30 > BALL_X + 8;
-        if (overlapsX && ballY < defender.h - 6) {
+        if (overlapsX && bally < defender.h - 6) {
             endMatch(false);
             return;
         }
