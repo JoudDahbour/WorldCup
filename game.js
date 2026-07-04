@@ -59,16 +59,26 @@ function isTall(size, index){
 }
 
 function spawnDefender() {
-    const height = 55 + Math.floor(Math.random() * 26);
+    const size = pickSize();
+    const wrapper = document.createElement("figure");
+    wrapper.className = "obstacle";
+    let tallest = 0;
+    
+    for (let i = 0; i < size; i++) {
+        const tall = isTall(size, i);
+        const height = tall ? 96 + Math.floor(Math.random() * 18) : 58 + Math.floor(Math.random() * 20);
+        tallest = Math.max(tallest, height);
+        const person = document.createElement("figure");
+        person.className = tall ? "defender tall" : "defender";
+        person.style.height = `${height}px`;
+        wrapper.appendChild(person);
+    }
+    const width = size * DEFENDER_WIDTH + (size - 1) * DEFENDER_GAP;
     const x = pitch.offsetWidth + 20;
-    const el = document.createElement("figure");
-
-    el.className = "defender";
-    el.style.height = `${height}px`;
-    el.style.transform = `translateX(${x}px)`;
-    pitch.appendChild(el);
-    defenders.push({ el, x, h: height, counted: false });
-    framesToSpawn = Math.max(45, 85 - state.level * 8) + Math.floor(Math.random() * 45);
+    wrapper.style.transform = `translateX(${x}px)`;
+    pitch.appendChild(wrapper);
+    obstacles.push({ el: wrapper, x, w: width, h: tallest, size, counted: false });
+    framesToSpawn = Math.max(55, 92 - state.level * 6) + Math.floor(Math.random() * 40);
 }
 
 function endMatch(won) {
