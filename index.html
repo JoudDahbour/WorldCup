@@ -8,93 +8,17 @@
 </head>
 <body>
     <main>
-        <section id="home" class="screen active">
+        <section class="screen">
             <h1>Cup Runner</h1>
             <p class="tagline">one ball. four matches. one trophy.</p>
             <nav class="menu">
-                <button id="play-btn" class="primary">Play</button>
-                <button id="howto-btn" class="ghost">How To Play</button>
+                <a class="primary" href="team.html">Play</a>
+                <a class="ghost" href="howto.html">How To Play</a>
             </nav>
-        </section>
- 
-        <section id="howto" class="screen">
-            <header>
-                <button class="back-btn ghost">&larr; Back</button>
-                <h2>How To Play</h2>
-            </header>
-            <ul class="rules">
-                <li>Press <kbd>Space</kbd> or click the pitch to jump over defenders.</li>
-                <li>One defender needs a single jump. A wall of two needs a double jump, so press again while in the air.</li>
-                <li>Beat every defender in the match and the ball flies into the net. Goal means next level.</li>
-                <li>Get tackled and it is full time. You can replay the match.</li>
-                <li>Press <kbd>P</kbd> to pause during a match.</li>
-            </ul>
-        </section>
- 
-        <section id="team" class="screen">
-            <header>
-                <button class="back-btn ghost">&larr; Back</button>
-                <h2>Choose Your Team</h2>
-            </header>
-            <nav id="flag-picker"></nav>
-            <p class="hint">The other four become your opponents, shuffled into a new order every campaign.</p>
-            <button id="start-campaign" class="primary" disabled>Start Campaign &rarr;</button>
-        </section>
- 
-        <section id="levels" class="screen">
-            <header>
-                <button class="back-btn ghost">&larr; Back</button>
-                <h2 id="campaign-title">Road To The Cup</h2>
-            </header>
-            <nav id="level-cards"></nav>
-            <p class="hint">More defenders and more speed each level.</p>
-        </section>
- 
-        <section id="game" class="screen">
-            <header>
-                <p id="match-label"></p>
-                <p id="score-label"></p>
-            </header>
-            <section id="pitch">
-                <span id="ball"></span>
-            </section>
-        </section>
- 
-        <section id="goal" class="screen">
-            <h2 class="shout">Goooal!</h2>
-            <p id="goal-scoreline"></p>
-            <figure class="goal-frame">
-                <img src="images/goal.jpg" alt="Soccer goal with a full white net">
-                <span class="netted-ball"></span>
-            </figure>
-            <button id="next-btn" class="primary">Next Match &rarr;</button>
-        </section>
- 
-        <section id="fulltime" class="screen">
-            <h2 class="shout">Tackled &middot; Full Time</h2>
-            <p id="fulltime-scoreline"></p>
-            <p id="fulltime-stats"></p>
-            <nav class="menu">
-                <button id="replay-btn" class="primary">Replay Match</button>
-                <button id="levels-btn" class="ghost">Levels</button>
-                <button id="home-btn" class="ghost">Home</button>
-            </nav>
-        </section>
- 
-        <section id="trophy" class="screen">
-            <figure id="cup">
-                <span class="bowl"></span>
-                <span class="stem"></span>
-                <span class="base"></span>
-            </figure>
-            <h2 class="shout">World Champions!</h2>
-            <p id="trophy-stats"></p>
-            <button id="new-campaign" class="ghost">New Campaign</button>
         </section>
     </main>
     <footer>
         <p>Cup Runner &middot; a JavaScript game</p>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
