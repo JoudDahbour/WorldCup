@@ -320,7 +320,7 @@ kbd {
     z-index: 2;
 }
 
-.defender {
+.obstacle {
     position: absolute;
     left: 0;
     bottom: 64px;
