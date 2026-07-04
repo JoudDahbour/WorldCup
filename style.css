@@ -1,0 +1,431 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Regular.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Russo One";
+    src: url("fonts/RussoOne-Regular.ttf");
+    font-weight: 400;
+}
+
+:root {
+    --navy: #0f172a;
+    --stand: #223046;
+    --pitch: #15803d;
+    --pitch-dark: #14713a;
+    --gold: #fde047;
+    --gold-text: #422006;
+    --line: #e5e7eb;
+    --pale: #bbf7d0;
+    --goal-green: #118242;
+    --skin: #f4c7a1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--navy);
+    color: #f8fafc;
+    font-family: "Roboto", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    width: min(960px, 100%);
+    margin: 0 auto;
+    padding: 1rem;
+    flex: 1;
+}
+
+h1,
+h2,
+.primary {
+    font-family: "Russo One", sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    position: relative;
+    min-height: 540px;
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 1.5rem;
+    background:
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0 90px, rgba(0, 0, 0, 0.12) 90px 180px) left bottom / 100% 71% no-repeat,
+        linear-gradient(180deg, var(--navy) 0 16%, var(--stand) 16% 28%, var(--line) 28% 29%, var(--pitch) 29% 100%);
+}
+
+
+.screen header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.2rem;
+    background-color: rgba(15, 23, 42, 0.85);
+}
+
+.screen header h2 {
+    font-size: 1.1rem;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+}
+
+button,
+a.primary,
+a.ghost {
+    border-radius: 8px;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.primary {
+    background-color: var(--gold);
+    color: var(--gold-text);
+    padding: 0.75rem 2.2rem;
+}
+
+.primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.primary:hover:enabled,
+a.primary:hover {
+    transform: translateY(-2px);
+}
+
+.ghost {
+    background-color: transparent;
+    border: 1px solid var(--pale);
+    color: var(--pale);
+    padding: 0.5rem 1.2rem;
+}
+
+.ghost:hover {
+    background-color: rgba(187, 247, 208, 0.15);
+}
+
+h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.tagline {
+    color: var(--pale);
+}
+
+.menu {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.rules {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 560px;
+    background-color: rgba(15, 23, 42, 0.55);
+    padding: 1.4rem;
+    border-radius: 10px;
+}
+
+kbd {
+    border: 1px solid #64748b;
+    border-radius: 4px;
+    padding: 0.1rem 0.55rem;
+    color: var(--gold);
+    font-weight: 700;
+    font-family: inherit;
+}
+
+.hint {
+    color: var(--pale);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+#flag-picker {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flag {
+    background: none;
+    padding: 0.4rem;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.flag img {
+    width: 96px;
+    border-radius: 4px;
+    display: block;
+}
+
+.flag:hover {
+    opacity: 0.85;
+}
+
+.flag.selected {
+    border-color: var(--gold);
+    opacity: 1;
+}
+
+.flag.selected::after {
+    content: "\2713";
+    color: var(--gold);
+}
+
+#level-cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.level {
+    width: 160px;
+    background-color: var(--pitch-dark);
+    border: 2px solid rgba(34, 197, 94, 0.6);
+    border-radius: 12px;
+    padding: 1rem 0.6rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.level img {
+    width: 72px;
+    border-radius: 4px;
+}
+
+.level .match-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.level .status {
+    font-size: 0.8rem;
+    color: var(--pale);
+}
+
+.level.current {
+    border-color: var(--gold);
+    cursor: pointer;
+}
+
+.level.current .status {
+    color: var(--gold);
+}
+
+.level.current:hover {
+    transform: translateY(-3px);
+}
+
+.level.locked {
+    opacity: 0.55;
+}
+
+.level.won .status {
+    color: #4ade80;
+}
+
+#game {
+    padding: 0;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+#game header {
+    position: static;
+    font-weight: 700;
+}
+
+#score-label {
+    color: var(--gold);
+}
+
+#pitch {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    min-height: 420px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#pitch::after {
+    content: "";
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--line);
+}
+
+#ball {
+    position: absolute;
+    left: 70px;
+    bottom: 64px;
+    width: 34px;
+    height: 34px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.defender {
+    position: absolute;
+    left: 0;
+    bottom: 64px;
+    width: 30px;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(180deg, var(--skin) 0 35%, var(--kit, #da291c) 35% 100%);
+    will-change: transform;
+}
+
+#goal {
+    background: var(--goal-green);
+}
+
+.shout {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--gold);
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+#goal-scoreline,
+#fulltime-scoreline {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.goal-frame {
+    position: relative;
+}
+
+.goal-frame img {
+    width: min(420px, 80vw);
+    display: block;
+}
+
+.goal-frame::after {
+    content: "";
+    position: absolute;
+    top: 52%;
+    left: 46%;
+    width: 34px;
+    height: 34px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: shoot 0.9s ease-out;
+}
+
+@keyframes shoot {
+    from {
+        transform: translate(-260px, 90px) scale(0.7);
+    }
+    to {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+#fulltime-stats,
+#trophy-stats {
+    color: var(--pale);
+}
+
+#cup {
+    font-size: 6rem;
+    line-height: 1;
+}
+
+#confetti {
+    position: absolute;
+    inset: 0;
+    list-style: none;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#confetti li {
+    position: absolute;
+    top: -20px;
+    width: 8px;
+    height: 14px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(620px) rotate(360deg);
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 0.8rem;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+    .screen {
+        min-height: 480px;
+        padding: 1rem;
+    }
+
+    .flag img {
+        width: 72px;
+    }
+
+    .level {
+        width: 140px;
+    }
+}
