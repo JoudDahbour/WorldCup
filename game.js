@@ -36,7 +36,7 @@ function jump() {
     if (!running || paused) return;
     if (canJump) {
         velocity = JUMP_VELOCITY;
-        jumpsLeft--;
+        canJump = false;
     }
 }
 
@@ -113,6 +113,8 @@ function frame() {
 pitch.addEventListener("pointerdown", jump);
 
 document.addEventListener("keydown", (e) => {
+    if (e.repeat) 
+        return;
     if (e.code === "Space") {
         e.preventDefault();
         jump();
