@@ -4,6 +4,7 @@ document.querySelector("#trophy-stats").textContent = `${state.player} \u00b7 4 
 
 const confetti = document.querySelector("#confetti");
 const colors = ["#f87171", "#60a5fa", "#4ade80", "#f472b6", "#fbbf24"];
+
 for (let i = 0; i < 30; i++) {
     const piece = document.createElement("li");
     piece.style.left = `${Math.random() * 100}%`;

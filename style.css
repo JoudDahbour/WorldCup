@@ -275,6 +275,7 @@ kbd {
     color: #4ade80;
 }
 
+
 #game {
     padding: 0;
     justify-content: flex-start;
@@ -297,6 +298,9 @@ kbd {
     min-height: 420px;
     overflow: hidden;
     cursor: pointer;
+    background-size: cover;
+    background-position: bottom center;
+    image-rendering: pixelated;
 }
 
 #pitch::after {
@@ -312,22 +316,44 @@ kbd {
 #ball {
     position: absolute;
     left: 70px;
-    bottom: 64px;
-    width: 34px;
-    height: 34px;
-    background-color: #ffffff;
-    border-radius: 50%;
+    bottom: 23px;
+    width: 120px;
+    height: 120px;
+    background-image: url("images/ball.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     z-index: 2;
+    image-rendering: pixelated;
+}
+
+#ball.jumping {
+    background-image: url("images/ball2.png");
+}
+
+.defender {
+    width: 150px;
+    height: 190px;
+    background-image: url("images/player.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    image-rendering: pixelated;
+}
+
+.defender.two {
+    background-image: url("images/player2.png");
 }
 
 .obstacle {
     position: absolute;
     left: 0;
-    bottom: 64px;
-    width: 30px;
-    border-radius: 6px 6px 0 0;
-    background: linear-gradient(180deg, var(--skin) 0 35%, var(--kit, #da291c) 35% 100%);
+    bottom: 15px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
     will-change: transform;
+    z-index: 3;
 }
 
 #goal {

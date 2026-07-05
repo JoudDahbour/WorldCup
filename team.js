@@ -15,6 +15,7 @@ teams.forEach((team) => {
         btn.classList.add("selected");
         startCampaignBtn.disabled = false;
     });
+    
     flagPicker.appendChild(btn);
 });
 
@@ -28,5 +29,6 @@ startCampaignBtn.addEventListener("click", () => {
         totalBeaten: 0,
         lastMatch: null
     });
+
     window.location.href = "levels.html";
 });
