@@ -17,6 +17,8 @@ const backgrounds = ["images/stad.png", "images/stad2.png", "images/stad3.png", 
 const pitch = document.querySelector("#pitch");
 const ball = document.querySelector("#ball");
 const scoreLabel = document.querySelector("#score-label");
+const pauseMenu = document.querySelector("#pause-menu");
+const resumeBtn = document.querySelector("#resume-btn");
 
 const target = 10 + state.level * 2;
 const speed = 4.5 + state.level * 0.8;
@@ -140,22 +142,31 @@ function frame() {
     rafId = requestAnimationFrame(frame);
 }
 
+function togglePause() {
+    paused = !paused;
+    if (paused) {
+        cancelAnimationFrame(rafId);
+        pauseMenu.classList.remove("pause-hidden");
+    } else {
+        pauseMenu.classList.add("pause-hidden");
+        rafId = requestAnimationFrame(frame);
+    }
+}
+
 pitch.addEventListener("pointerdown", jump);
+resumeBtn.addEventListener("click", togglePause);
 
 document.addEventListener("keydown", (e) => {
     if (e.repeat) 
         return;
+
     if (e.code === "Space") {
         e.preventDefault();
         jump();
     }
+
     if (e.code === "KeyP" && running) {
-        paused = !paused;
-        if (paused) {
-            cancelAnimationFrame(rafId);
-        } else {
-            rafId = requestAnimationFrame(frame);
-        }
+        togglePause();
     }
 });
 
