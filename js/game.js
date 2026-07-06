@@ -28,7 +28,7 @@ let velocity = 0;
 let jumpsLeft = 2;
 let obstacles = [];
 let framesToSpawn = 60;
-let score = 0;
+let currentScore = 0;
 let running = true;
 let paused = false;
 let rafId = null;
@@ -38,7 +38,7 @@ pitch.style.backgroundImage = `url("${backgrounds[state.level]}")`;
 document.querySelector("#match-label").textContent = `Level ${state.level + 1} - ${player.name} vs ${opponent.name}`;
 
 function updateScoreLabel() {
-    scoreLabel.textContent = `Passes: ${String(score).padStart(2, "0")}/${target}`;
+    scoreLabel.textContent = `Passes: ${String(currentScore).padStart(2, "0")}/${target}`;
 }
 
 function jump() {
@@ -83,10 +83,10 @@ function spawnDefender() {
 function endMatch(won) {
     running = false;
     cancelAnimationFrame(rafId);
-    state.lastMatch = { opponent: opponent.name, score, target, won };
+    state.lastMatch = { opponent: opponent.name, score: currentScore, target, won };
 
     if (won) {
-        state.totalBeaten += score;
+        state.totalBeaten += currentScore;
         state.results[state.level] = true;
         state.level++;
     }
@@ -125,9 +125,9 @@ function frame() {
 
         if (!obstacle.counted && obstacle.x + obstacle.w < BALL_X) {
             obstacle.counted = true;
-            score += 1;
+            currentScore += 1;
             updateScoreLabel();
-            if (score >= target) {
+            if (currentScore >= target) {
                 endMatch(true);
                 return;
             }
